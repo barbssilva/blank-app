@@ -14,19 +14,19 @@ clientes = {
 col1, col2 = st.columns(2)
 with col1:
     if st.button(clientes['AW']):
-        st.session_state['cliente_selecionado'] = "Cliente A"
+        st.session_state['cliente_selecionado'] = clientes["AW"]
 with col2:
     if st.button(clientes['AS']):
-        st.session_state['cliente_selecionado'] = "Cliente B"
+        st.session_state['cliente_selecionado'] = clientes['AS']
 
 # Segunda linha com 2 colunas
 col3, col4 = st.columns(2)
 with col3:
     if st.button(clientes['MH']):
-        st.session_state['cliente_selecionado'] = "Cliente C"
+        st.session_state['cliente_selecionado'] = clientes['MH']
 with col4:
     if st.button(clientes['MC']):
-        st.session_state['cliente_selecionado'] = "Cliente D"
+        st.session_state['cliente_selecionado'] = clientes['MC']
 
 cliente = st.session_state.get('cliente_selecionado', None)
 
