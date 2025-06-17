@@ -37,16 +37,32 @@ if cliente:
         # Exemplo: importar funções do script alexander_wang
         from alexander_wang import pdf_to_excel, convert_selected_columns, formatar_excel, remove_zeros, add_info
         uploaded_file = st.file_uploader("Carregue o PDF", type=["pdf"])
+        
+        # Obter nome original do ficheiro carregado
+        original_filename = uploaded_file.name
+        base_filename = os.path.splitext(original_filename)[0]  # sem extensão
 
         if uploaded_file is not None:
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
                 # Copia diretamente o conteúdo do ficheiro carregado para o ficheiro temporário
                 shutil.copyfileobj(uploaded_file, temp_pdf)
-                temp_pdf_path = temp_pdf.name
+                #temp_pdf_path = temp_pdf.name
+
+                # Criar caminho temporário usando o mesmo nome base
+                temp_dir = tempfile.gettempdir()
+                temp_pdf_path = os.path.join(temp_dir, original_filename)
+
+            # Guardar o conteúdo do uploaded_file nesse caminho
+            with open(temp_pdf_path, "wb") as f:
+                f.write(uploaded_file.getbuffer())
+            
+            # Agora o Excel vai usar o mesmo nome base
+            excel_entrada = os.path.join(temp_dir, f"{base_filename}.xlsx")
+            excel_saida = os.path.join(temp_dir, f"{base_filename}_processed.xlsx")
         
             # Agora já podes usar o ficheiro temporário no teu código:
-            excel_entrada = temp_pdf_path.replace(".pdf", ".xlsx")
-            excel_saida = temp_pdf_path.replace(".pdf", "_processed.xlsx")
+            #excel_entrada = temp_pdf_path.replace(".pdf", ".xlsx")
+            #excel_saida = temp_pdf_path.replace(".pdf", "_processed.xlsx")
         
             styles, sample_sizes = pdf_to_excel(temp_pdf_path, excel_entrada)
             convert_selected_columns(excel_entrada, excel_saida)
@@ -62,4 +78,3 @@ if cliente:
             os.remove(temp_pdf_path)
             os.remove(excel_entrada)
             os.remove(excel_saida)
-
