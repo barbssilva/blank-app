@@ -47,7 +47,6 @@ with col_uploader:
         if st.button("❌ Fechar upload"):
             st.session_state['mostrar_uploader'] = False
             st.session_state['cliente_selecionado'] = None
-            st.experimental_rerun()  # força atualizar para limpar uploader
 
         if uploaded_file is not None:
             st.write(f"Ficheiro {uploaded_file.name} carregado!")
