@@ -43,11 +43,8 @@ if cliente:
 
         # Agora roda o código do cliente AW se for esse o selecionado
         if cliente == 'AW':
-            # Exemplo: importar funções do script AW (que já tem no teu projeto)
+            # Exemplo: importar funções do script alexander_wang
             from alexander_wang import pdf_to_excel, convert_selected_columns, formatar_excel, remove_zeros, add_info
-
-            import tempfile
-            import os
 
             # Salva o ficheiro PDF temporariamente
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
@@ -64,7 +61,7 @@ if cliente:
             remove_zeros(excel_saida)
             add_info(excel_saida, styles, sample_sizes)
 
-            st.success("Processamento terminado!")
+            st.success("Processo terminado!")
 
             # Oferecer download do arquivo final
             with open(excel_saida, "rb") as f:
