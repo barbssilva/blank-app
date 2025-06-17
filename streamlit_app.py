@@ -49,14 +49,12 @@ if cliente:
             # Agora cria o excel_entrada e excel_saida no mesmo diretório do ficheiro temporário,
             # mas com nomes baseados no ficheiro original:
             temp_dir = os.path.dirname(temp_excel_path)
-            #definir o nome do ficheiro excel para o qual será transferida a informação do pdf
-            excel_entrada = os.path.join(temp_dir, base_name + ".xlsx")
             #definir o nome do ficheiro excel que irá conter as alterações: conversão para cm e calculo da diferença entre tamanhos
             excel_saida = os.path.join(temp_dir, base_name + "_processed.xlsx")
 
 
             keywords= ['1st proto', 'sms','size chart','spec']
-            output_file1 = selecionar_tabelas(excel_entrada,keywords,excel_saida, output_file)
+            output_file1 = selecionar_tabelas(temp_excel_path,keywords,excel_saida)
 
             #processamento do excel criado
             convert_selected_columns(excel_saida)
