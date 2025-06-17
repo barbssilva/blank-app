@@ -30,12 +30,10 @@ with col4:
 
 cliente = st.session_state.get('cliente_selecionado', None)
 
-''' para exibir por escrito qual cliente está a ser selecionado no momento
-if cliente:
-    st.write(f"Cliente selecionado: **{cliente}**")
+#para exibir por escrito qual cliente está a ser selecionado no momento
+#if cliente:
+#    st.write(f"Cliente selecionado: **{cliente}**")
     
-'''
-
 
 if cliente:
 
