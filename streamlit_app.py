@@ -9,7 +9,7 @@ st.title("Por favor, selecione o cliente.")
 clientes = {
     "AW": "Alexander Wang",
     "AS": "AllSaints",
-    "MH": "MadHappy",
+    "MH": "Madhappy",
     "MC":"Mochino",
 }
 
@@ -33,10 +33,14 @@ with col4:
 cliente = st.session_state.get('cliente_selecionado', None)
 
 if cliente:
+    if cliente == 'Madhappy':
+
+        uploaded_file = st.file_uploader("Carregue o Excel", type=["xls", "xlsx"])
+        
     if cliente == 'Alexander Wang':
         # Exemplo: importar funções do script alexander_wang
         from alexander_wang import pdf_to_excel, convert_selected_columns, formatar_excel, remove_zeros, add_info
-        uploaded_file = st.file_uploader("Carregue o PDF", type=["pdf"])
+        uploaded_file = st.file_uploader("Carregue o excel", type=["pdf"])
 
         if uploaded_file is not None:
             base_name = os.path.splitext(uploaded_file.name)[0]
