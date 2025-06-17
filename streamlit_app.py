@@ -36,7 +36,7 @@ cliente = st.session_state.get('cliente_selecionado', None)
     
 
 if cliente:
-    uploaded_file = st.file_uploader(f"Carregue o ficheiro para o cliente {clientes[cliente]}")
+    uploaded_file = st.file_uploader("Carregue o ficheiro")
 
     if uploaded_file is not None:
         st.write(f"Ficheiro {uploaded_file.name} carregado!")
