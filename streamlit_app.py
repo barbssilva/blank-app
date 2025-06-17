@@ -10,25 +10,21 @@ clientes = {
     "MC":"Mochino",
 }
 
+# Variável para controlar se o uploader deve aparecer
 if 'mostrar_uploader' not in st.session_state:
     st.session_state['mostrar_uploader'] = False
-if 'cliente_selecionado' not in st.session_state:
-    st.session_state['cliente_selecionado'] = None
 
-# Linha 1 dos clientes
-col1, col2, col_uploader = st.columns([1,1,2])  # col_uploader para uploader aparecer ao lado
-
+col1, col2 = st.columns(2)
 with col1:
     if st.button(clientes['AW']):
         st.session_state['cliente_selecionado'] = clientes['AW']
-        st.session_state['mostrar_uploader'] = True
+        st.session_state['mostrar_uploader'] = True  # mostra uploader
 with col2:
     if st.button(clientes['AS']):
         st.session_state['cliente_selecionado'] = clientes['AS']
         st.session_state['mostrar_uploader'] = True
 
-# Linha 2 dos clientes
-col3, col4 = st.columns([1,1])
+col3, col4 = st.columns(2)
 with col3:
     if st.button(clientes['MH']):
         st.session_state['cliente_selecionado'] = clientes['MH']
@@ -38,15 +34,44 @@ with col4:
         st.session_state['cliente_selecionado'] = clientes['MC']
         st.session_state['mostrar_uploader'] = True
 
-# Mostrar uploader na coluna da direita se ativado
-with col_uploader:
-    if st.session_state['mostrar_uploader']:
-        st.write(f"Cliente selecionado: **{st.session_state['cliente_selecionado']}**")
-        uploaded_file = st.file_uploader("Carregue o ficheiro", key='upload')
-        # Botão para fechar a área do uploader (aqui o "x")
-        if st.button("❌ Fechar upload"):
-            st.session_state['mostrar_uploader'] = False
-            st.session_state['cliente_selecionado'] = None
+# Mostrar cliente selecionado
+cliente = st.session_state.get('cliente_selecionado', None)
 
-        if uploaded_file is not None:
-            st.write(f"Ficheiro {uploaded_file.name} carregado!")
+# Mostrar uploader só se mostrar_uploader for True
+if st.session_state['mostrar_uploader']:
+    uploaded_file = st.file_uploader("Carregue o ficheiro")
+
+    if uploaded_file is not None:
+        st.write(f"Ficheiro {uploaded_file.name} carregado!")
+        
+    if cliente:
+        if cliente == 'Alexander Wang':
+            # Exemplo: importar funções do script alexander_wang
+            from alexander_wang import pdf_to_excel, convert_selected_columns, formatar_excel, remove_zeros, add_info
+
+            # Salva o ficheiro PDF temporariamente
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
+                temp_pdf.write(uploaded_file.read())
+                temp_pdf_path = temp_pdf.name
+
+            excel_entrada = temp_pdf_path.replace(".pdf", ".xlsx")
+            excel_saida = temp_pdf_path.replace(".pdf", "_processed.xlsx")
+
+            # Executa funções do script
+            styles, sample_sizes = pdf_to_excel(temp_pdf_path, excel_entrada)
+            convert_selected_columns(excel_entrada, excel_saida)
+            formatar_excel(excel_saida)
+            remove_zeros(excel_saida)
+            add_info(excel_saida, styles, sample_sizes)
+
+            st.success("Processo terminado!")
+
+            # Oferecer download do arquivo final
+            with open(excel_saida, "rb") as f:
+                st.download_button("Descarregar Excel Processado", f, file_name=os.path.basename(excel_saida))
+
+            # Apaga arquivos temporários
+            os.remove(temp_pdf_path)
+            os.remove(excel_entrada)
+            os.remove(excel_saida)
+
