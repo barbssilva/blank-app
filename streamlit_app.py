@@ -38,7 +38,7 @@ cliente = st.session_state.get('cliente_selecionado', None)
 if cliente:
 
     # Upload do ficheiro (Excel, PDF, etc)
-    uploaded_file = st.file_uploader("Carrega o ficheiro para processar")
+    uploaded_file = st.file_uploader("Carregue o ficheiro")
 
     if uploaded_file is not None:
         st.write(f"Ficheiro {uploaded_file.name} carregado!")
