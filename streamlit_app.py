@@ -30,5 +30,22 @@ with col4:
 
 cliente = st.session_state.get('cliente_selecionado', None)
 
+''' para exibir por escrito qual cliente está a ser selecionado no momento
 if cliente:
     st.write(f"Cliente selecionado: **{cliente}**")
+    
+'''
+
+
+if cliente:
+
+    # Upload do ficheiro (Excel, PDF, etc)
+    uploaded_file = st.file_uploader("Carrega o ficheiro para processar")
+
+    if uploaded_file is not None:
+        st.write(f"Ficheiro {uploaded_file.name} carregado!")
+
+        # Aqui podes chamar a tua função/script para processar o ficheiro
+        # Exemplo simples: ler conteúdo se for texto
+        # content = uploaded_file.read()
+        # st.write(content)
