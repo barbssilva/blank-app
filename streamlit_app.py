@@ -46,23 +46,12 @@ if cliente:
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
                 # Copia diretamente o conteúdo do ficheiro carregado para o ficheiro temporário
                 shutil.copyfileobj(uploaded_file, temp_pdf)
-                #temp_pdf_path = temp_pdf.name
+                temp_pdf_path = temp_pdf.name
 
-                # Criar caminho temporário usando o mesmo nome base
-                temp_dir = tempfile.gettempdir()
-                temp_pdf_path = os.path.join(temp_dir, original_filename)
 
-            # Guardar o conteúdo do uploaded_file nesse caminho
-            with open(temp_pdf_path, "wb") as f:
-                f.write(uploaded_file.getbuffer())
-            
-            # Agora o Excel vai usar o mesmo nome base
-            excel_entrada = os.path.join(temp_dir, f"{base_filename}.xlsx")
-            excel_saida = os.path.join(temp_dir, f"{base_filename}_processed.xlsx")
-        
             # Agora já podes usar o ficheiro temporário no teu código:
-            #excel_entrada = temp_pdf_path.replace(".pdf", ".xlsx")
-            #excel_saida = temp_pdf_path.replace(".pdf", "_processed.xlsx")
+            excel_entrada = temp_pdf_path.replace(".pdf", ".xlsx")
+            excel_saida = temp_pdf_path.replace(".pdf", "_processed.xlsx")
         
             styles, sample_sizes = pdf_to_excel(temp_pdf_path, excel_entrada)
             convert_selected_columns(excel_entrada, excel_saida)
@@ -73,7 +62,7 @@ if cliente:
             st.success("Processo terminado!")
         
             with open(excel_saida, "rb") as f:
-                st.download_button("Descarregar Excel Processado", f, file_name=os.path.basename(excel_saida))
+                st.download_button("Descarregar Excel Processado", f, file_name=excel_saida)
         
             os.remove(temp_pdf_path)
             os.remove(excel_entrada)
