@@ -44,7 +44,7 @@ if cliente:
             # Criar ficheiro excel temporário
             with tempfile.NamedTemporaryFile(delete=False, suffix=".xlsx") as temp_excel:
                 temp_excel.write(uploaded_file.read())
-                temp_excel_path = temp_pdf.name
+                temp_excel_path = temp_excel.name
         
             # Agora cria o excel_entrada e excel_saida no mesmo diretório do ficheiro temporário,
             # mas com nomes baseados no ficheiro original:
