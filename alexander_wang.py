@@ -286,48 +286,4 @@ def add_info(excel_output2, lista_styles, lista_sample_sizes):
 
     return
 
-"RUN CODE"
-if __name__ == "__main__":
-    #carregar ficheiro pdf
-    uploaded_pdf = st.file_uploader("Carrega o PDF")
-    #definir nome do ficheiro pdf
-    pdf_name = f'z_processed_files/{sys.argv[1]}.pdf'
-    #definir o nome do ficheiro excel para o qual será transferida a informação do pdf
-    excel_entrada = f'z_processed_files/{sys.argv[1]}.xlsx'
-    #definir o nome do ficheiro excel que irá conter as alterações: conversão para cm e calculo da diferença entre tamanhos
-    excel_saida = f'z_processed_files/{sys.argv[1]}_processed.xlsx'
-
-    #conversão de pdf para excel
-    styles, sample_sizes=pdf_to_excel(pdf_name,excel_entrada)
-
-
-    #sys.exit()
-
-    #processamento do excel criado
-    convert_selected_columns(excel_entrada,excel_saida)
-
-
-
-    #formatar ficheiro excel
-    #formatar_excel(excel_saida)
-
-    #Remover o primeiro ficheiro excel criado uma vez que já não será utilizado
-    os.remove(excel_entrada)
-
-    #sys.exit()
-
-    # Chama a função para formatar o arquivo
-    formatar_excel(excel_saida)
-
-    remove_zeros(excel_saida)
-
-    "acrescentar STYLE e SAMPLE SIZE"
-    add_info(excel_saida, styles, sample_sizes)
-
-
-    print('                     PROCESSO TERMINADO                ')
-    print('                          :)                            ')
-    print(f'    VER FICHEIRO -----> {sys.argv[1]}_processed.xlsx     ')
-
-
 
