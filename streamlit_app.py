@@ -1,27 +1,32 @@
 import streamlit as st
 
 
-st.title("Seleciona o Cliente")
+st.title("Por favor, selecione o cliente.")
 
 clientes = {
-    "Cliente A": "👩‍💼",
-    "Cliente B": "👨‍🔧",
-    "Cliente C": "🏢",
+    "AW": "Alexander Wang",
+    "AS": "AllSaints",
+    "MH": "MadHappy",
+    "MC":"Mochino",
 }
 
-col1, col2, col3 = st.columns(3)
-
+# Primeira linha com 2 colunas
+col1, col2 = st.columns(2)
 with col1:
-    if st.button(f"{clientes['Cliente A']} Cliente A"):
+    if st.button(f"{clientes['AW']} Cliente A"):
         st.session_state['cliente_selecionado'] = "Cliente A"
-
 with col2:
-    if st.button(f"{clientes['Cliente B']} Cliente B"):
+    if st.button(f"{clientes['AS']} Cliente B"):
         st.session_state['cliente_selecionado'] = "Cliente B"
 
+# Segunda linha com 2 colunas
+col3, col4 = st.columns(2)
 with col3:
-    if st.button(f"{clientes['Cliente C']} Cliente C"):
+    if st.button(f"{clientes['MH']} Cliente C"):
         st.session_state['cliente_selecionado'] = "Cliente C"
+with col4:
+    if st.button(f"{clientes['MC']} Cliente D"):
+        st.session_state['cliente_selecionado'] = "Cliente D"
 
 cliente = st.session_state.get('cliente_selecionado', None)
 
