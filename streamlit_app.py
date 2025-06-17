@@ -53,23 +53,23 @@ if st.session_state['mostrar_uploader']:
 
             # Salva o ficheiro PDF temporariamente
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
-                    temp_pdf.write(file_bytes)
-                    temp_pdf_path = temp_pdf.name
-            
-                excel_entrada = temp_pdf_path.replace(".pdf", ".xlsx")
-                excel_saida = temp_pdf_path.replace(".pdf", "_processed.xlsx")
-            
-                styles, sample_sizes = pdf_to_excel(temp_pdf_path, excel_entrada)
-                convert_selected_columns(excel_entrada, excel_saida)
-                formatar_excel(excel_saida)
-                remove_zeros(excel_saida)
-                add_info(excel_saida, styles, sample_sizes)
-            
-                st.success("Processo terminado!")
-            
-                with open(excel_saida, "rb") as f:
-                    st.download_button("Descarregar Excel Processado", f, file_name=os.path.basename(excel_saida))
-            
-                os.remove(temp_pdf_path)
-                os.remove(excel_entrada)
-                os.remove(excel_saida)
+                temp_pdf.write(file_bytes)
+                temp_pdf_path = temp_pdf.name
+        
+            excel_entrada = temp_pdf_path.replace(".pdf", ".xlsx")
+            excel_saida = temp_pdf_path.replace(".pdf", "_processed.xlsx")
+        
+            styles, sample_sizes = pdf_to_excel(temp_pdf_path, excel_entrada)
+            convert_selected_columns(excel_entrada, excel_saida)
+            formatar_excel(excel_saida)
+            remove_zeros(excel_saida)
+            add_info(excel_saida, styles, sample_sizes)
+        
+            st.success("Processo terminado!")
+        
+            with open(excel_saida, "rb") as f:
+                st.download_button("Descarregar Excel Processado", f, file_name=os.path.basename(excel_saida))
+        
+            os.remove(temp_pdf_path)
+            os.remove(excel_entrada)
+            os.remove(excel_saida)
