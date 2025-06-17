@@ -47,13 +47,12 @@ if st.session_state['mostrar_uploader']:
         
     if cliente:
         if cliente == 'Alexander Wang':
-            file_bytes = uploaded_file.read()  # lê tudo uma vez
             # Exemplo: importar funções do script alexander_wang
             from alexander_wang import pdf_to_excel, convert_selected_columns, formatar_excel, remove_zeros, add_info
 
             # Salva o ficheiro PDF temporariamente
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
-                temp_pdf.write(file_bytes)
+                temp_pdf.write(uploaded_file)
                 temp_pdf_path = temp_pdf.name
         
             excel_entrada = temp_pdf_path.replace(".pdf", ".xlsx")
