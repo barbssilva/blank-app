@@ -39,23 +39,20 @@ if cliente:
         uploaded_file = st.file_uploader("Carregue o PDF", type=["pdf"])
 
         if uploaded_file is not None:
-            # Nome base sem extensão
             base_name = os.path.splitext(uploaded_file.name)[0]
-            
-            # Cria ficheiro temporário para o PDF
+        
+            # Criar ficheiro PDF temporário
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
                 temp_pdf.write(uploaded_file.read())
                 temp_pdf_path = temp_pdf.name
         
-            # Define nomes para Excel baseados no nome original
-            excel_entrada = f"{base_name}.xlsx"
-            excel_saida = f"{base_name}_processed.xlsx"
-
-
-            # Agora já podes usar o ficheiro temporário no teu código:
-            excel_entrada = temp_pdf_path.replace(".pdf", ".xlsx")
-            excel_saida = temp_pdf_path.replace(".pdf", "_processed.xlsx")
+            # Agora cria o excel_entrada e excel_saida no mesmo diretório do ficheiro temporário,
+            # mas com nomes baseados no ficheiro original:
+            temp_dir = os.path.dirname(temp_pdf_path)
+            excel_entrada = os.path.join(temp_dir, base_name + ".xlsx")
+            excel_saida = os.path.join(temp_dir, base_name + "_processed.xlsx")
         
+            # Executar processamento (exemplo)
             styles, sample_sizes = pdf_to_excel(temp_pdf_path, excel_entrada)
             convert_selected_columns(excel_entrada, excel_saida)
             formatar_excel(excel_saida)
@@ -64,9 +61,11 @@ if cliente:
         
             st.success("Processo terminado!")
         
+            # Abrir o ficheiro Excel processado para download
             with open(excel_saida, "rb") as f:
                 st.download_button("Descarregar Excel Processado", f, file_name=os.path.basename(excel_saida))
         
+            # Apagar ficheiros temporários
             os.remove(temp_pdf_path)
             os.remove(excel_entrada)
             os.remove(excel_saida)
