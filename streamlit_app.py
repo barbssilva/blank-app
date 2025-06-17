@@ -39,10 +39,17 @@ if cliente:
         uploaded_file = st.file_uploader("Carregue o PDF", type=["pdf"])
 
         if uploaded_file is not None:
+            # Nome base sem extensão
+            base_name = os.path.splitext(uploaded_file.name)[0]
+            
+            # Cria ficheiro temporário para o PDF
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
-                # Copia diretamente o conteúdo do ficheiro carregado para o ficheiro temporário
-                shutil.copyfileobj(uploaded_file, temp_pdf)
+                temp_pdf.write(uploaded_file.read())
                 temp_pdf_path = temp_pdf.name
+        
+            # Define nomes para Excel baseados no nome original
+            excel_entrada = f"{base_name}.xlsx"
+            excel_saida = f"{base_name}_processed.xlsx"
 
 
             # Agora já podes usar o ficheiro temporário no teu código:
@@ -58,7 +65,7 @@ if cliente:
             st.success("Processo terminado!")
         
             with open(excel_saida, "rb") as f:
-                st.download_button("Descarregar Excel Processado", f, file_name=excel_saida)
+                st.download_button("Descarregar Excel Processado", f, file_name=os.path.basename(excel_saida))
         
             os.remove(temp_pdf_path)
             os.remove(excel_entrada)
