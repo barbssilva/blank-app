@@ -10,23 +10,31 @@ clientes = {
     "MC":"Mochino",
 }
 
+# Variável para controlar se o uploader deve aparecer
+if 'mostrar_uploader' not in st.session_state:
+    st.session_state['mostrar_uploader'] = False
+
 # Primeira linha com 2 colunas
 col1, col2 = st.columns(2)
 with col1:
     if st.button(clientes['AW']):
         st.session_state['cliente_selecionado'] = clientes["AW"]
+        st.session_state['mostrar_uploader'] = True  # mostra uploader
 with col2:
     if st.button(clientes['AS']):
         st.session_state['cliente_selecionado'] = clientes['AS']
+        st.session_state['mostrar_uploader'] = True
 
 # Segunda linha com 2 colunas
 col3, col4 = st.columns(2)
 with col3:
     if st.button(clientes['MH']):
         st.session_state['cliente_selecionado'] = clientes['MH']
+        st.session_state['mostrar_uploader'] = True
 with col4:
     if st.button(clientes['MC']):
         st.session_state['cliente_selecionado'] = clientes['MC']
+        st.session_state['mostrar_uploader'] = True
 
 cliente = st.session_state.get('cliente_selecionado', None)
 
@@ -35,13 +43,14 @@ cliente = st.session_state.get('cliente_selecionado', None)
 #    st.write(f"Cliente selecionado: **{cliente}**")
     
 
-if cliente:
+# Mostrar uploader só se mostrar_uploader for True
+if st.session_state['mostrar_uploader']:
     uploaded_file = st.file_uploader("Carregue o ficheiro")
 
     if uploaded_file is not None:
         st.write(f"Ficheiro {uploaded_file.name} carregado!")
-
-        # Agora roda o código do cliente AW se for esse o selecionado
+        
+    if cliente:
         if cliente == 'Alexander Wang':
             # Exemplo: importar funções do script alexander_wang
             from alexander_wang import pdf_to_excel, convert_selected_columns, formatar_excel, remove_zeros, add_info
