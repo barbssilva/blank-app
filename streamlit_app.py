@@ -37,10 +37,6 @@ if cliente:
         # Exemplo: importar funções do script alexander_wang
         from alexander_wang import pdf_to_excel, convert_selected_columns, formatar_excel, remove_zeros, add_info
         uploaded_file = st.file_uploader("Carregue o PDF", type=["pdf"])
-        
-        # Obter nome original do ficheiro carregado
-        original_filename = uploaded_file.name
-        base_filename = os.path.splitext(original_filename)[0]  # sem extensão
 
         if uploaded_file is not None:
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
