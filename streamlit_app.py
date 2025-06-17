@@ -40,10 +40,9 @@ if cliente:
 
     if uploaded_file is not None:
         st.write(f"Ficheiro {uploaded_file.name} carregado!")
-        st.write(f"{cliente}")
 
         # Agora roda o código do cliente AW se for esse o selecionado
-        if cliente == 'AW':
+        if cliente == 'Alexander Wang':
             # Exemplo: importar funções do script alexander_wang
             from alexander_wang import pdf_to_excel, convert_selected_columns, formatar_excel, remove_zeros, add_info
 
