@@ -1,5 +1,7 @@
 import streamlit as st
+import shutil
 import tempfile
+import os
 
 
 st.title("Por favor, selecione o cliente.")
