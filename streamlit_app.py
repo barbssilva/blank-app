@@ -11,6 +11,7 @@ clientes = {
     "AS": "AllSaints",
     "MH": "Madhappy",
     "MC":"Mochino",
+    "MR": "Moncler",
 }
 
 col1, col2 = st.columns(2)
@@ -20,6 +21,10 @@ with col1:
 with col2:
     if st.button(clientes['AS']):
         st.session_state['cliente_selecionado'] = clientes['AS']
+
+with col1:
+    if st.button(clientes['MR']):  
+        st.session_state['cliente_selecionado'] = clientes['MR']
 
 col3, col4 = st.columns(2)
 with col3:
