@@ -41,13 +41,13 @@ cliente = st.session_state.get('cliente_selecionado', None)
 # Mostrar uploader só se mostrar_uploader for True
 if st.session_state['mostrar_uploader']:
     uploaded_file = st.file_uploader("Carregue o ficheiro")
-    file_bytes = uploaded_file.read()  # lê tudo uma vez
 
     if uploaded_file is not None:
         st.write(f"Ficheiro {uploaded_file.name} carregado!")
         
     if cliente:
         if cliente == 'Alexander Wang':
+            file_bytes = uploaded_file.read()  # lê tudo uma vez
             # Exemplo: importar funções do script alexander_wang
             from alexander_wang import pdf_to_excel, convert_selected_columns, formatar_excel, remove_zeros, add_info
 
