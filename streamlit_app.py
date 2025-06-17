@@ -71,7 +71,7 @@ if cliente:
         
             formatar_excel(excel_saida)
 
-            add_images(pdf_name,excel_saida, inf_modelo)
+            add_images(temp_pdf_path,excel_saida, inf_modelo)
                     
             st.success("Processo terminado!")
         
