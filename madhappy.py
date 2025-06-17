@@ -105,7 +105,7 @@ def decimal_para_fracao(valor):
 '''
 A função selecionar_tabelas seleciona apenas as sheets e tabelas pretendidas
 '''
-def selecionar_tabelas(excel_entrada,keywords,excel_saida):
+def selecionar_tabelas(excel_entrada,keywords,excel_saida,output_file):
     workbook=openpyxl.load_workbook(excel_entrada,data_only=True)
     sheet_names=workbook.sheetnames
 
@@ -130,7 +130,7 @@ def selecionar_tabelas(excel_entrada,keywords,excel_saida):
         std = workbook[sheet_name]
         workbook.remove(std)
 
-    output_file = f'{sys.argv[1]}_aux.xlsx'
+    #output_file = f'{sys.argv[1]}_aux.xlsx'
     workbook.save(output_file)
     workbook.close()
     
@@ -169,7 +169,7 @@ def selecionar_tabelas(excel_entrada,keywords,excel_saida):
 
     xls.close()
 
-    os.remove(output_file)
+    #os.remove(output_file)
     
 '''
 A função convert_selected_columns lê o ficheiro excel que foi criado pela função pdf_to_excel e faz a conversão de polegadas para centímetros e 
