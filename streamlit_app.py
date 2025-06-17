@@ -54,20 +54,24 @@ if cliente:
             #definir o nome do ficheiro excel que irá conter as alterações: conversão para cm e calculo da diferença entre tamanhos
             excel_saida = os.path.join(temp_dir, base_name + "_processed.xlsx")
 
+            output_file = os.path.join(temp_dir, base_name + "_aux.xlsx")
+
             keywords= ['1st proto', 'sms','size chart','spec']
-            output_file1 = selecionar_tabelas(excel_entrada,keywords,excel_saida)
+            output_file1 = selecionar_tabelas(excel_entrada,keywords,excel_saida, output_file)
 
             #processamento do excel criado
             convert_selected_columns(excel_saida)
 
             #formatar excel
             formatar_excel(excel_saida)
-
+            
             st.success("Processo terminado!")
         
             # Abrir o ficheiro Excel processado para download
             with open(excel_saida, "rb") as f:
                 st.download_button("Descarregar Excel Processado", f, file_name=os.path.basename(excel_saida))
+                
+            os.remove(output_file)
         
     if cliente == 'Alexander Wang':
         # Exemplo: importar funções do script alexander_wang
