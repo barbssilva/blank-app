@@ -11,50 +11,38 @@ clientes = {
     "MC":"Mochino",
 }
 
-# Variável para controlar se o uploader deve aparecer
-if 'mostrar_uploader' not in st.session_state:
-    st.session_state['mostrar_uploader'] = False
-
 col1, col2 = st.columns(2)
 with col1:
     if st.button(clientes['AW']):
         st.session_state['cliente_selecionado'] = clientes['AW']
-        st.session_state['mostrar_uploader'] = True  # mostra uploader
 with col2:
     if st.button(clientes['AS']):
         st.session_state['cliente_selecionado'] = clientes['AS']
-        st.session_state['mostrar_uploader'] = True
 
 col3, col4 = st.columns(2)
 with col3:
     if st.button(clientes['MH']):
         st.session_state['cliente_selecionado'] = clientes['MH']
-        st.session_state['mostrar_uploader'] = True
 with col4:
     if st.button(clientes['MC']):
         st.session_state['cliente_selecionado'] = clientes['MC']
-        st.session_state['mostrar_uploader'] = True
 
 # Mostrar cliente selecionado
 cliente = st.session_state.get('cliente_selecionado', None)
 
-# Mostrar uploader só se mostrar_uploader for True
-if st.session_state['mostrar_uploader']:
-    uploaded_file = st.file_uploader("Carregue o ficheiro")
+if cliente:
+    if cliente == 'Alexander Wang':
+        # Exemplo: importar funções do script alexander_wang
+        from alexander_wang import pdf_to_excel, convert_selected_columns, formatar_excel, remove_zeros, add_info
+        uploaded_file = st.file_uploader("Carregue o PDF", type=["pdf"])
 
-    if uploaded_file is not None:
-        st.write(f"Ficheiro {uploaded_file.name} carregado!")
-        
-    if cliente:
-        if cliente == 'Alexander Wang':
-            # Exemplo: importar funções do script alexander_wang
-            from alexander_wang import pdf_to_excel, convert_selected_columns, formatar_excel, remove_zeros, add_info
-
-            # Salva o ficheiro PDF temporariamente
+        if uploaded_file is not None:
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
-                temp_pdf.write(uploaded_file)
+                # Copia diretamente o conteúdo do ficheiro carregado para o ficheiro temporário
+                shutil.copyfileobj(uploaded_file, temp_pdf)
                 temp_pdf_path = temp_pdf.name
         
+            # Agora já podes usar o ficheiro temporário no teu código:
             excel_entrada = temp_pdf_path.replace(".pdf", ".xlsx")
             excel_saida = temp_pdf_path.replace(".pdf", "_processed.xlsx")
         
@@ -72,3 +60,4 @@ if st.session_state['mostrar_uploader']:
             os.remove(temp_pdf_path)
             os.remove(excel_entrada)
             os.remove(excel_saida)
+
