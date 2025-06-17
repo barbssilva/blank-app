@@ -39,6 +39,48 @@ with col2:
 cliente = st.session_state.get('cliente_selecionado', None)
 
 if cliente:
+    if cliente == "Moncler":
+        # Exemplo: importar funções do script moncler
+        from moncler import pdf_to_excel, excel_processing, dif_calc, formatar_excel, add_images
+        uploaded_file = st.file_uploader("Carregue o pdf", type=["pdf"])
+        
+        if uploaded_file is not None:
+            base_name = os.path.splitext(uploaded_file.name)[0]
+        
+            # Criar ficheiro PDF temporário
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
+                temp_pdf.write(uploaded_file.read())
+                temp_pdf_path = temp_pdf.name
+        
+            # Agora cria o excel_entrada e excel_saida no mesmo diretório do ficheiro temporário,
+            # mas com nomes baseados no ficheiro original:
+            temp_dir = os.path.dirname(temp_pdf_path)
+            excel_entrada = os.path.join(temp_dir, base_name + ".xlsx")
+            excel_saida = os.path.join(temp_dir, base_name + "_processed.xlsx")
+
+
+            #conversão de pdf para excel
+            #texto_df é guardado caso depois seja preciso adicionar o nome do modelo ao excel no fim
+            texto_df=pdf_to_excel(temp_pdf_path,excel_entrada)
+            inf_modelo = [texto_df.iloc[0].item(), texto_df.iloc[1].item()]
+            # procurar pelo nome do modelo
+
+            excel_processing(excel_entrada, excel_saida)    
+        
+            dif_calc(excel_saida)
+        
+            formatar_excel(excel_saida)
+                    
+            st.success("Processo terminado!")
+        
+            # Abrir o ficheiro Excel processado para download
+            with open(excel_saida, "rb") as f:
+                st.download_button("Descarregar Excel Processado", f, file_name=os.path.basename(excel_saida))
+        
+            #Remover o primeiro ficheiro excel criado uma vez que já não será utilizado
+            os.remove(excel_entrada)
+
+    
     if cliente == 'Madhappy':
         # Exemplo: importar funções do script madhappy
         from madhappy import inches_to_cm, decimal_para_fracao, selecionar_tabelas, convert_selected_columns, formatar_excel
