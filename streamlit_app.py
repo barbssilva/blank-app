@@ -35,7 +35,7 @@ cliente = st.session_state.get('cliente_selecionado', None)
 if cliente:
     if cliente == 'Madhappy':
         # Exemplo: importar funções do script madhappy
-        from madhappy import inches_to_cm, decimal_para_fracao, selecionar_tabelas, convert_selected_columns, formatar_excel, 
+        from madhappy import inches_to_cm, decimal_para_fracao, selecionar_tabelas, convert_selected_columns, formatar_excel
         uploaded_file = st.file_uploader("Carregue o Excel", type=["xls", "xlsx"])
 
         if uploaded_file is not None:
