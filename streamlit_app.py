@@ -70,6 +70,8 @@ if cliente:
             dif_calc(excel_saida)
         
             formatar_excel(excel_saida)
+
+            add_images(pdf_name,excel_saida, inf_modelo)
                     
             st.success("Processo terminado!")
         
