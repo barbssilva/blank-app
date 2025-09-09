@@ -102,6 +102,11 @@ if cliente:
             #definir o nome do ficheiro excel que irá conter as alterações: conversão para cm e calculo da diferença entre tamanhos
             excel_saida = os.path.join(temp_dir, base_name + "_processed.xlsx")
 
+            # Criar um novo arquivo temporário para salvar as alterações
+            base_name = os.path.basename(excel_saida)               # só o nome do ficheiro
+            new_name = base_name.replace(".xlsx", "_temp.xlsx")     # troca a extensão
+            tempor_said = os.path.join(temp_dir, new_name)  
+
             #nome ficheiro auxiliar
             output_file = os.path.join(temp_dir, base_name + "_aux.xlsx")
             
