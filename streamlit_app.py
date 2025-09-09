@@ -114,7 +114,7 @@ if cliente:
             output_file1 = selecionar_tabelas(temp_excel_path,keywords,excel_saida,output_file)
 
             #processamento do excel criado
-            convert_selected_columns(excel_saida)
+            convert_selected_columns(excel_saida,tempor_said)
 
             #formatar excel
             formatar_excel(excel_saida)
