@@ -175,10 +175,10 @@ def selecionar_tabelas(excel_entrada,keywords,excel_saida,output_file):
 A função convert_selected_columns lê o ficheiro excel que foi criado pela função pdf_to_excel e faz a conversão de polegadas para centímetros e 
 nas tabelas que contém medidas para tamanhos diferentes, calcula a diferença entre tamanhos consecutivos
 '''
-def convert_selected_columns(excel_saida):
+def convert_selected_columns(excel_saida,tempor_saida):
     xls = pd.ExcelFile(excel_saida)
 
-    with pd.ExcelWriter(excel_saida, engine='xlsxwriter') as writer:
+    with pd.ExcelWriter(tempor_saida, engine='xlsxwriter') as writer:
         for sheet_name in xls.sheet_names:
             #ler ficheiro excel
             df = pd.read_excel(xls, sheet_name=sheet_name, dtype=str)
@@ -250,6 +250,9 @@ def convert_selected_columns(excel_saida):
             df_final.to_excel(writer, sheet_name=sheet_name, index=False)
 
     xls.close()
+
+    # Substituir o arquivo original pelo novo
+    os.replace(tempor_saida, excel_saida)
 
 '''
 A função formatar_excel formata algumas definições do excel, como ajustar a largura e altura de alguma celulas e acrescentar limites nas celulas
