@@ -57,7 +57,7 @@ if cliente:
             #obter o diretorio do ficheiro temporário:
             temp_dir = os.path.dirname(excel_path)
             #criar os ficheiros excel auxiliares no mesmo diretorio que o ficheiro temporario criado anteriormente
-            excel_outpu1 = os.path.join(temp_dir, base_name + "_new1.xlsx")
+            excel_output1 = os.path.join(temp_dir, base_name + "_new1.xlsx")
             excel_output2 = os.path.join(temp_dir, base_name + "_new.xlsx")
             excel_final = os.path.join(temp_dir, base_name + "_processed.xlsx")
             
