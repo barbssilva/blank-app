@@ -39,6 +39,59 @@ with col2:
 cliente = st.session_state.get('cliente_selecionado', None)
 
 if cliente:
+    if cliente == "AllSaints":
+        from allsaints import escolher_sheets, preparar_celulas_traducao, add_tabelas_traducoes, formatar_excel, add_info, concat
+        uploaded_file = st.file_uploader("Carregue o Excel", type=["xls", "xlsx"])
+
+        if uploaded_file is not None:
+            #extrair o nome do ficheiro
+            base_name = os.path.splitext(uploaded_file.name)[0]
+        
+            # Criar ficheiro excel temporário com extensao .xlsx
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".xlsx") as temp_excel:
+                #guardar o conteudo do ficheiro carregado no ficheiro temporário criado
+                temp_excel.write(uploaded_file.read())
+                #guardar o caminho do ficheiro temporário criado na varivel excel_path
+                excel_path = temp_excel.name
+        
+            #obter o diretorio do ficheiro temporário:
+            temp_dir = os.path.dirname(excel_path)
+            #criar os ficheiros excel auxiliares no mesmo diretorio que o ficheiro temporario criado anteriormente
+            excel_outpu1 = os.path.join(temp_dir, base_name + "_new1.xlsx")
+            excel_output2 = os.path.join(temp_dir, base_name + "_new.xlsx")
+            excel_final = os.path.join(temp_dir, base_name + "_processed.xlsx")
+            
+            # CRIAR UM FICHEIRO APENAS COM AS PALAVRAS SELECIONADAS
+            keywords1= ['design front sheet','design spec','proto','sms','gold spec','grading']
+            escolher_sheets(excel_path,excel_output1,keywords1)
+
+            #formatar corretamente os ficheiros para que depois seja colocada a traducao
+            preparar_celulas_traducao(excel_output1, linha_inicio=6)
+
+
+            #traducao
+            traducoes = traducao(excel_output1, traducao_dict)
+
+            #calcular tabelas e adicionar a traducao
+            keywords= ['grading']
+            add_tabelas_traducoes(excel_path, excel_output2, keywords,traducoes)
+
+            #formatar excel com as tabelas de medidas
+            formatar_excel(excel_output2)  
+            
+            #adicionar style name, season e block
+            add_info(excel_output1, excel_output2)
+        
+            #juntar os dois ficheiros 
+            concat(excel_output1, excel_output2, excel_final)
+
+            st.success("Processo terminado!")
+
+            # Abrir o ficheiro Excel processado para download
+            with open(excel_final, "rb") as f:
+                st.download_button("Descarregar Excel Processado", f, file_name=os.path.basename(excel_final))
+            
+        
     if cliente == "Moncler":
         # Exemplo: importar funções do script moncler
         from moncler import pdf_to_excel, excel_processing, dif_calc, formatar_excel, add_images
