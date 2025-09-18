@@ -63,29 +63,29 @@ if cliente:
 
             with st.spinner("⏳ Por favor aguarde..."):
                 
-            # CRIAR UM FICHEIRO APENAS COM AS PALAVRAS SELECIONADAS
-            keywords1= ['design front sheet','design spec','proto','sms','gold spec','grading']
-            escolher_sheets(excel_path,excel_output1,keywords1)
-
-            #formatar corretamente os ficheiros para que depois seja colocada a traducao
-            preparar_celulas_traducao(excel_output1, linha_inicio=6)
-
-
-            #traducao
-            traducoes = traducao(excel_output1)
-
-            #calcular tabelas e adicionar a traducao
-            keywords= ['grading']
-            add_tabelas_traducoes(excel_path, excel_output2, keywords,traducoes)
-
-            #formatar excel com as tabelas de medidas
-            formatar_excel(excel_output2)  
+                # CRIAR UM FICHEIRO APENAS COM AS PALAVRAS SELECIONADAS
+                keywords1= ['design front sheet','design spec','proto','sms','gold spec','grading']
+                escolher_sheets(excel_path,excel_output1,keywords1)
+    
+                #formatar corretamente os ficheiros para que depois seja colocada a traducao
+                preparar_celulas_traducao(excel_output1, linha_inicio=6)
+    
+    
+                #traducao
+                traducoes = traducao(excel_output1)
+    
+                #calcular tabelas e adicionar a traducao
+                keywords= ['grading']
+                add_tabelas_traducoes(excel_path, excel_output2, keywords,traducoes)
+    
+                #formatar excel com as tabelas de medidas
+                formatar_excel(excel_output2)  
+                
+                #adicionar style name, season e block
+                add_info(excel_output1, excel_output2)
             
-            #adicionar style name, season e block
-            add_info(excel_output1, excel_output2)
-        
-            #juntar os dois ficheiros 
-            concat(excel_output1, excel_output2, excel_final)
+                #juntar os dois ficheiros 
+                concat(excel_output1, excel_output2, excel_final)
 
             
             st.success("Processo terminado!")
