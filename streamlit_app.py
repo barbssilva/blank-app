@@ -90,6 +90,7 @@ if cliente:
 
             placeholder.empty()
             st.success("Processo terminado!")
+            st.write("Por favor, tenha atenção que o excel pode ter sheets ocultadas")
 
             # Abrir o ficheiro Excel processado para download
             with open(excel_final, "rb") as f:
