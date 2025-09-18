@@ -294,12 +294,17 @@ def add_tabelas_traducoes(excel_path, excel_output2, keywords,traducoes):
     for sheet_name, df in excel_data.items():
         # Selecionar apenas as colunas que contêm tamanhos específicos
         size_columns = [col for col in df.columns.tolist() if any(str(col).replace(" ", "") == str(size).replace(" ", "") for size in SIZES)]
+        
         for i in range(len(size_columns)):
             df.loc[:, size_columns[i]] = df[size_columns[i]].apply(converter_para_float)
 
         for i in range(1, len(size_columns)):
             coluna_atual = size_columns[i]
             coluna_anterior = size_columns[i - 1]
+
+            # Ignorar se qualquer coluna estiver completamente vazia
+            if df[coluna_atual].dropna().empty or df[coluna_anterior].dropna().empty:
+                continue  # passa para a próxima iteração
                 
             # Nome da nova coluna de diferença
             nova_coluna = f'Dif {coluna_atual}-{coluna_anterior}'
