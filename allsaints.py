@@ -1,5 +1,4 @@
 import openpyxl
-import openai
 import time
 import sys
 import pandas as pd
