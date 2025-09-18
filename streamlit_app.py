@@ -121,13 +121,14 @@ if cliente:
             inf_modelo = [texto_df.iloc[0].item(), texto_df.iloc[1].item()]
             # procurar pelo nome do modelo
 
-            excel_processing(excel_entrada, excel_saida)    
-        
-            dif_calc(excel_saida)
-        
-            formatar_excel(excel_saida)
-
-            add_images(temp_pdf_path,excel_saida, inf_modelo)
+            with st.spinner("⏳ Por favor aguarde..."):
+                excel_processing(excel_entrada, excel_saida)    
+            
+                dif_calc(excel_saida)
+            
+                formatar_excel(excel_saida)
+    
+                add_images(temp_pdf_path,excel_saida, inf_modelo)
                     
             st.success("Processo terminado!")
         
@@ -165,15 +166,16 @@ if cliente:
 
             #nome ficheiro auxiliar
             output_file = os.path.join(temp_dir, base_name + "_aux.xlsx")
-            
-            keywords= ['1st proto', 'sms','size chart','spec']
-            output_file1 = selecionar_tabelas(temp_excel_path,keywords,excel_saida,output_file)
 
-            #processamento do excel criado
-            convert_selected_columns(excel_saida,tempor_said)
-
-            #formatar excel
-            formatar_excel(excel_saida)
+            with st.spinner("⏳ Por favor aguarde..."):
+                keywords= ['1st proto', 'sms','size chart','spec']
+                output_file1 = selecionar_tabelas(temp_excel_path,keywords,excel_saida,output_file)
+    
+                #processamento do excel criado
+                convert_selected_columns(excel_saida,tempor_said)
+    
+                #formatar excel
+                formatar_excel(excel_saida)
             
             st.success("Processo terminado!")
         
@@ -201,13 +203,14 @@ if cliente:
             temp_dir = os.path.dirname(temp_pdf_path)
             excel_entrada = os.path.join(temp_dir, base_name + ".xlsx")
             excel_saida = os.path.join(temp_dir, base_name + "_processed.xlsx")
-        
-            # Executar processamento (exemplo)
-            styles, sample_sizes = pdf_to_excel(temp_pdf_path, excel_entrada)
-            convert_selected_columns(excel_entrada, excel_saida)
-            formatar_excel(excel_saida)
-            remove_zeros(excel_saida)
-            add_info(excel_saida, styles, sample_sizes)
+
+            with st.spinner("⏳ Por favor aguarde..."):
+                # Executar processamento (exemplo)
+                styles, sample_sizes = pdf_to_excel(temp_pdf_path, excel_entrada)
+                convert_selected_columns(excel_entrada, excel_saida)
+                formatar_excel(excel_saida)
+                remove_zeros(excel_saida)
+                add_info(excel_saida, styles, sample_sizes)
         
             st.success("Processo terminado!")
         
