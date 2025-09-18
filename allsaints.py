@@ -287,7 +287,7 @@ def add_tabelas_traducoes(excel_path, excel_output2, keywords,traducoes):
     excel_data = pd.read_excel(excel_output2, sheet_name=None)
     #calcular a diferença entre os tamanhos
     SIZES = {'UK2', 'UK4', 'UK6', 'UK8', 'UK10', 'UK12', 'UK14', 'UK16', "XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL", 
-             'XS/28','S/30','M/32','L/34','XL/36','XXL/38', 'XXS/34','XS/34','S/36','M/38','L/40','XL/42','XXL/44','XXXL'}
+             'XS/28','S/30','M/32','L/34','XL/36','XXL/38', 'XXS/34','XS/34','S/36','M/38','L/40','XL/42','XXL/44'}
 
 
     colunas_diferenca=[]
