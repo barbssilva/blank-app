@@ -40,7 +40,7 @@ cliente = st.session_state.get('cliente_selecionado', None)
 
 if cliente:
     if cliente == "AllSaints":
-        from allsaints import escolher_sheets, preparar_celulas_traducao, add_tabelas_traducoes, formatar_excel, add_info, concat
+        from allsaints import escolher_sheets, preparar_celulas_traducao, traducao, add_tabelas_traducoes, formatar_excel, add_info, concat
         uploaded_file = st.file_uploader("Carregue o Excel", type=["xls", "xlsx"])
 
         if uploaded_file is not None:
