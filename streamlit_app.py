@@ -91,9 +91,8 @@ if cliente:
             placeholder.empty()
             st.success("Processo terminado!")
             st.write("Por favor, ter em atenção que o excel pode ter sheets ocultadas")
-            st.write("Desta forma, mesmo que o excel original tenha colunas ocultadas com o nome grading")
-            st.write("será criada na mesma uma cópia dessa sheet com uma tabela de medidas que contém a ")
-            st.write("tradução e a diferença entre os diferentes tamanhos")
+            st.write("Portanto, mesmo que o excel original tenha colunas, com nome grading, ocultadas será criada, na mesma,")
+            st.write("uma cópia dessa sheet com uma tabela de medidas que contém a tradução e a diferença entre os diferentes tamanhos")
 
             # Abrir o ficheiro Excel processado para download
             with open(excel_final, "rb") as f:
