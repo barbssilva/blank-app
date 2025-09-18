@@ -302,9 +302,13 @@ def add_tabelas_traducoes(excel_path, excel_output2, keywords,traducoes):
             coluna_atual = size_columns[i]
             coluna_anterior = size_columns[i - 1]
 
-            # Ignorar se qualquer coluna estiver completamente vazia
+            # Verifica se as colunas ainda existem no DataFrame
+            if coluna_atual not in df.columns or coluna_anterior not in df.columns:
+                continue
+
+            # Ignora se qualquer coluna estiver completamente vazia
             if df[coluna_atual].dropna().empty or df[coluna_anterior].dropna().empty:
-                continue  # passa para a próxima iteração
+                continue  # passa para a próxima iteração     
                 
             # Nome da nova coluna de diferença
             nova_coluna = f'Dif {coluna_atual}-{coluna_anterior}'
