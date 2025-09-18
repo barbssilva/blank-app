@@ -43,10 +43,6 @@ if cliente:
         from allsaints import escolher_sheets, preparar_celulas_traducao, traducao, add_tabelas_traducoes, formatar_excel, add_info, concat
         uploaded_file = st.file_uploader("Carregue o Excel", type=["xls", "xlsx"])
 
-        with st.spinner("⏳ Por favor, aguarde..."):
-            # aqui corre o teu processo longo
-            time.sleep(5)  # exemplo
-
         if uploaded_file is not None:
             #extrair o nome do ficheiro
             base_name = os.path.splitext(uploaded_file.name)[0]
@@ -64,7 +60,12 @@ if cliente:
             excel_output1 = os.path.join(temp_dir, base_name + "_new1.xlsx")
             excel_output2 = os.path.join(temp_dir, base_name + "_new.xlsx")
             excel_final = os.path.join(temp_dir, base_name + "_processed.xlsx")
+
             
+            with st.spinner("⏳ Por favor, aguarde..."):
+                # aqui corre o teu processo longo
+                time.sleep(5)  # exemplo
+                
             # CRIAR UM FICHEIRO APENAS COM AS PALAVRAS SELECIONADAS
             keywords1= ['design front sheet','design spec','proto','sms','gold spec','grading']
             escolher_sheets(excel_path,excel_output1,keywords1)
