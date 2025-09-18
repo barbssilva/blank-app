@@ -70,7 +70,7 @@ if cliente:
 
 
             #traducao
-            traducoes = traducao(excel_output1, traducao_dict)
+            traducoes = traducao(excel_output1)
 
             #calcular tabelas e adicionar a traducao
             keywords= ['grading']
