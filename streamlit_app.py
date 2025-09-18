@@ -43,7 +43,7 @@ if cliente:
         from allsaints import escolher_sheets, preparar_celulas_traducao, traducao, add_tabelas_traducoes, formatar_excel, add_info, concat
         uploaded_file = st.file_uploader("Carregue o Excel", type=["xls", "xlsx"])
 
-        with st.spinner("⏳ Aguarde, a processar..."):
+        with st.spinner("⏳ Por favor, aguarde..."):
             # aqui corre o teu processo longo
             time.sleep(5)  # exemplo
 
