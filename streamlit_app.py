@@ -2,7 +2,7 @@ import streamlit as st
 import shutil
 import tempfile
 import os
-
+import time
 
 st.title("Por favor, selecione o cliente.")
 
@@ -42,6 +42,10 @@ if cliente:
     if cliente == "AllSaints":
         from allsaints import escolher_sheets, preparar_celulas_traducao, traducao, add_tabelas_traducoes, formatar_excel, add_info, concat
         uploaded_file = st.file_uploader("Carregue o Excel", type=["xls", "xlsx"])
+
+        with st.spinner("⏳ Aguarde, a processar..."):
+            # aqui corre o teu processo longo
+            time.sleep(5)  # exemplo
 
         if uploaded_file is not None:
             #extrair o nome do ficheiro
