@@ -90,6 +90,7 @@ if cliente:
 
             placeholder.empty()
             st.success("Processo terminado!")
+            st.write("NÃO SE ESQUEÇA DE VERIFICAR TODAS AS TRADUÇÕES")
             st.write("Por favor, ter em atenção que o excel pode ter sheets ocultadas")
             st.write("Portanto, mesmo que o excel original tenha ocultadas sheets, com o nome grading, será criada na mesma, uma cópia dessa sheet com uma tabela de medidas que contém a tradução e a diferença entre os diferentes tamanhos")
 
