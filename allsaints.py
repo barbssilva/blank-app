@@ -83,9 +83,9 @@ def preparar_celulas_traducao(excel_path, linha_inicio=6):
 
 def traducao(excel_output1):
     traducao_dict={"armhole straight":"CAVA A DIREITO",
-        "back neck drop":"PROF. DECOTE COSTAS",
+        "back neck drop":"PROFUNDIDADE DECOTE COSTAS",
         "back neck width - straight":"ABERTURA DECOTE COSTAS",
-        "back neck width - snp to snp straight - straight":"ABERTURA DECOTE COSTAS - PO A PO A DIREITO",
+        "back neck width - snp to snp straight":"ABERTURA DECOTE COSTAS - PO A PO A DIREITO",
         "back rise - including waistband":"GANCHO COSTA INCL. CINTO",
         "back pocket width":"LARGURA BOLSO COSTA",
         "back pocket depth":"ALTURA BOLSO COSTA",
