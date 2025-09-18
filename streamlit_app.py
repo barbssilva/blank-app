@@ -61,8 +61,7 @@ if cliente:
             excel_output2 = os.path.join(temp_dir, base_name + "_new.xlsx")
             excel_final = os.path.join(temp_dir, base_name + "_processed.xlsx")
 
-            placeholder = st.empty()
-            placeholder.info("⏳ Por favor aguarde...")
+            with st.spinner("⏳ Por favor aguarde..."):
                 
             # CRIAR UM FICHEIRO APENAS COM AS PALAVRAS SELECIONADAS
             keywords1= ['design front sheet','design spec','proto','sms','gold spec','grading']
@@ -88,7 +87,7 @@ if cliente:
             #juntar os dois ficheiros 
             concat(excel_output1, excel_output2, excel_final)
 
-            placeholder.empty()
+            
             st.success("Processo terminado!")
 
             # Abrir o ficheiro Excel processado para download
