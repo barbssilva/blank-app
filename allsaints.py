@@ -97,6 +97,7 @@ def traducao(excel_output1):
         "cb length - cb back neck seam to hem edge":"COMP. COSTA DESDE DECOTE COSTA",
         "cuff depth":"ALTURA BAINHA MANGA",
         "collar depth at cb":"ALTURA GOLA",
+        "collar trim depth":"ALTURA GOLA",
         "exposed drawcord length":"CORDÃO EXPOSTO",
         "front length - snp to bottom hem edge":"COMP. FRENTE DESDE PO",
         "front neck drop - snp to cf invisible line":"PROF.DECOTE FRENTE DESDE PO",
@@ -106,6 +107,7 @@ def traducao(excel_output1):
         "front pocket depth - measure along side seam":"ABERTURA BOLSO",
         "front neck curved":"DECOTE FRENTE CURVADO",
         "front armhole curved":"CAVA FRENTE CURVADA",
+        "front neck drop - snp to snp straight": "PROFUNDIDADE DECOTE FRENTE DO PO",
         "hem width":"FUNDO",
         "hem width measured at peak of hem curve":"FUNDO",
         "hem width on seam":"FUNDO NA COSTURA",
@@ -161,7 +163,7 @@ def traducao(excel_output1):
         "1/2 high hip - {num}cm below waist":"ANCA ALTA A {num} CM ABAIXO DA CINTA",
         "1/2 low hip - {num}cm below waist":"ANCA BAIXA A {num} CM ABAIXO DA CINTA",
         "raise {num] cm": "SUBIR {num}CM",
-        "1/2 cuff width":" ABERTURA MANGA",
+        "1/2 cuff width":"ABERTURA MANGA",
 }
     
     # Carregar o arquivo Excel
