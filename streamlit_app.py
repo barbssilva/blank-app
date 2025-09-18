@@ -61,33 +61,34 @@ if cliente:
             excel_output2 = os.path.join(temp_dir, base_name + "_new.xlsx")
             excel_final = os.path.join(temp_dir, base_name + "_processed.xlsx")
 
-            with st.spinner("⏳ Por favor aguarde..."):
+            placeholder = st.empty()
+            placeholder.info("⏳ Por favor aguarde...")
                 
-                # CRIAR UM FICHEIRO APENAS COM AS PALAVRAS SELECIONADAS
-                keywords1= ['design front sheet','design spec','proto','sms','gold spec','grading']
-                escolher_sheets(excel_path,excel_output1,keywords1)
+            # CRIAR UM FICHEIRO APENAS COM AS PALAVRAS SELECIONADAS
+            keywords1= ['design front sheet','design spec','proto','sms','gold spec','grading']
+            escolher_sheets(excel_path,excel_output1,keywords1)
     
-                #formatar corretamente os ficheiros para que depois seja colocada a traducao
-                preparar_celulas_traducao(excel_output1, linha_inicio=6)
+            #formatar corretamente os ficheiros para que depois seja colocada a traducao
+            preparar_celulas_traducao(excel_output1, linha_inicio=6)
     
     
-                #traducao
-                traducoes = traducao(excel_output1)
+            #traducao
+            traducoes = traducao(excel_output1)
     
-                #calcular tabelas e adicionar a traducao
-                keywords= ['grading']
-                add_tabelas_traducoes(excel_path, excel_output2, keywords,traducoes)
+            #calcular tabelas e adicionar a traducao
+            keywords= ['grading']
+            add_tabelas_traducoes(excel_path, excel_output2, keywords,traducoes)
     
-                #formatar excel com as tabelas de medidas
-                formatar_excel(excel_output2)  
+            #formatar excel com as tabelas de medidas
+            formatar_excel(excel_output2)  
                 
-                #adicionar style name, season e block
-                add_info(excel_output1, excel_output2)
+            #adicionar style name, season e block
+            add_info(excel_output1, excel_output2)
             
-                #juntar os dois ficheiros 
-                concat(excel_output1, excel_output2, excel_final)
+            #juntar os dois ficheiros 
+            concat(excel_output1, excel_output2, excel_final)
 
-            
+            placeholder.empty()
             st.success("Processo terminado!")
 
             # Abrir o ficheiro Excel processado para download
@@ -121,15 +122,18 @@ if cliente:
             inf_modelo = [texto_df.iloc[0].item(), texto_df.iloc[1].item()]
             # procurar pelo nome do modelo
 
-            with st.spinner("⏳ Por favor aguarde..."):
-                excel_processing(excel_entrada, excel_saida)    
+            placeholder = st.empty()
+            placeholder.info("⏳ Por favor aguarde...")
             
-                dif_calc(excel_saida)
+            excel_processing(excel_entrada, excel_saida)    
             
-                formatar_excel(excel_saida)
+            dif_calc(excel_saida)
+            
+            formatar_excel(excel_saida)
     
-                add_images(temp_pdf_path,excel_saida, inf_modelo)
-                    
+            add_images(temp_pdf_path,excel_saida, inf_modelo)
+
+            placeholder.empty()
             st.success("Processo terminado!")
         
             # Abrir o ficheiro Excel processado para download
@@ -167,16 +171,19 @@ if cliente:
             #nome ficheiro auxiliar
             output_file = os.path.join(temp_dir, base_name + "_aux.xlsx")
 
-            with st.spinner("⏳ Por favor aguarde..."):
-                keywords= ['1st proto', 'sms','size chart','spec']
-                output_file1 = selecionar_tabelas(temp_excel_path,keywords,excel_saida,output_file)
-    
-                #processamento do excel criado
-                convert_selected_columns(excel_saida,tempor_said)
-    
-                #formatar excel
-                formatar_excel(excel_saida)
+            placeholder = st.empty()
+            placeholder.info("⏳ Por favor aguarde...")
             
+            keywords= ['1st proto', 'sms','size chart','spec']
+            output_file1 = selecionar_tabelas(temp_excel_path,keywords,excel_saida,output_file)
+    
+            #processamento do excel criado
+            convert_selected_columns(excel_saida,tempor_said)
+    
+            #formatar excel
+            formatar_excel(excel_saida)
+
+            placeholder.empty()
             st.success("Processo terminado!")
         
             # Abrir o ficheiro Excel processado para download
@@ -204,14 +211,17 @@ if cliente:
             excel_entrada = os.path.join(temp_dir, base_name + ".xlsx")
             excel_saida = os.path.join(temp_dir, base_name + "_processed.xlsx")
 
-            with st.spinner("⏳ Por favor aguarde..."):
-                # Executar processamento (exemplo)
-                styles, sample_sizes = pdf_to_excel(temp_pdf_path, excel_entrada)
-                convert_selected_columns(excel_entrada, excel_saida)
-                formatar_excel(excel_saida)
-                remove_zeros(excel_saida)
-                add_info(excel_saida, styles, sample_sizes)
-        
+            placeholder = st.empty()
+            placeholder.info("⏳ Por favor aguarde...")
+            
+            # Executar processamento (exemplo)
+            styles, sample_sizes = pdf_to_excel(temp_pdf_path, excel_entrada)
+            convert_selected_columns(excel_entrada, excel_saida)
+            formatar_excel(excel_saida)
+            remove_zeros(excel_saida)
+            add_info(excel_saida, styles, sample_sizes)
+
+            placeholder.empty()
             st.success("Processo terminado!")
         
             # Abrir o ficheiro Excel processado para download
