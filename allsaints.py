@@ -85,7 +85,7 @@ def traducao(excel_output1):
     traducao_dict={"armhole straight":"CAVA A DIREITO",
         "back neck drop":"PROF. DECOTE COSTAS",
         "back neck width - straight":"ABERTURA DECOTE COSTAS",
-        "back neck width - snp to snp straight - straight":"ABERTURA DECOTE COSTAS",
+        "back neck width - snp to snp straight - straight":"ABERTURA DECOTE COSTAS - PO A PO A DIREITO",
         "back rise - including waistband":"GANCHO COSTA INCL. CINTO",
         "back pocket width":"LARGURA BOLSO COSTA",
         "back pocket depth":"ALTURA BOLSO COSTA",
@@ -95,7 +95,7 @@ def traducao(excel_output1):
         "belt length":"COMPRMENTO DO CINTO",
         "belt depth":"ALTURA DO CINTO",
         "cb length - cb back neck seam to hem edge":"COMP. COSTA DESDE DECOTE COSTA",
-        "cuff depth":"ALTURA PUNHO",
+        "cuff depth":"ALTURA BAINHA MANGA",
         "collar depth at cb":"ALTURA GOLA",
         "exposed drawcord length":"CORDÃO EXPOSTO",
         "front length - snp to bottom hem edge":"COMP. FRENTE DESDE PO",
@@ -161,7 +161,7 @@ def traducao(excel_output1):
         "1/2 high hip - {num}cm below waist":"ANCA ALTA A {num} CM ABAIXO DA CINTA",
         "1/2 low hip - {num}cm below waist":"ANCA BAIXA A {num} CM ABAIXO DA CINTA",
         "raise {num] cm": "SUBIR {num}CM",
-        "1/2 cuff width":" LARGURA DO PUNHO",
+        "1/2 cuff width":" ABERTURA MANGA",
 }
     
     # Carregar o arquivo Excel
