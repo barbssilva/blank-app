@@ -280,7 +280,6 @@ def add_info(excel_output2, lista_styles, lista_sample_sizes):
         cell_ssize1 = ws.cell(row=3, column=2)
         cell_ssize1.value = f"{valor2}".strip()  # Concatenar com espaço
         cell_ssize.font = Font(bold=True)  # Deixa em negrito
-
         i+=1
     wb_destino.save(excel_output2)
 
