@@ -38,7 +38,7 @@ def encontrar_tabela(ws):
     linha_titulos = None
     for linha in range(1, ws.max_row + 1):
         v = ws.cell(linha, 1).value
-        if isinstance(v, str) and v.strip().upper() == TEXTO_INICIO_TABELA:
+        if v is not None and str(v).strip().upper() == TEXTO_INICIO_TABELA:
             linha_titulos = linha
             break
     if linha_titulos is None:
