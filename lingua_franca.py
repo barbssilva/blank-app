@@ -58,7 +58,7 @@ def encontrar_tabela(ws):
 
 
 def processar(caminho_entrada, caminho_saida):
-    wb = load_workbook(caminho_entrada)
+    wb = load_workbook(caminho_entrada,rich_text=True)
     ws = wb.active
     linha_titulos, ultima_linha, ultima_coluna = encontrar_tabela(ws)
 
