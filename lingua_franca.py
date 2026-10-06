@@ -133,9 +133,3 @@ def processar(caminho_entrada, caminho_saida):
         ws.page_setup.orientation = "landscape"
 
     wb.save(caminho_saida)
-
-
-if __name__ == "__main__":
-    entrada = Path(f'{sys.argv[1]}.xlsx')
-    saida = Path(f'{sys.argv[1]}- cm.xlsx')
-    processar(entrada, saida)
