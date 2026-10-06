@@ -12,6 +12,7 @@ clientes = {
     "MH": "Madhappy",
     "MC":"Mochino",
     "MR": "Moncler",
+    "LF": "LINGUA FRANCA",
 }
 
 col1, col2 = st.columns(2)
@@ -34,6 +35,10 @@ with col2:
 with col2:
     if st.button(clientes['MC']):
         st.session_state['cliente_selecionado'] = clientes['MC']
+        
+with col2:
+    if st.button(clientes['LF']):
+        st.session_state['cliente_selecionado'] = clientes['LF']
 
 # Mostrar cliente selecionado
 cliente = st.session_state.get('cliente_selecionado', None)
@@ -223,6 +228,43 @@ if cliente:
             formatar_excel(excel_saida)
             remove_zeros(excel_saida)
             add_info(excel_saida, styles, sample_sizes)
+
+            placeholder.empty()
+            st.success("Processo terminado!")
+        
+            # Abrir o ficheiro Excel processado para download
+            with open(excel_saida, "rb") as f:
+                st.download_button("Descarregar Excel Processado", f, file_name=os.path.basename(excel_saida))
+        
+            # Apagar ficheiros temporários
+            os.remove(temp_pdf_path)
+            os.remove(excel_entrada)
+            os.remove(excel_saida)
+
+    if cliente == 'LINGUA FRANCA':
+        # Exemplo: importar funções do script lingua_franca
+        from lingua_franca import processar
+        uploaded_file = st.file_uploader("Carregue o excel", type=["pdf"])
+        
+        if uploaded_file is not None:
+            base_name = os.path.splitext(uploaded_file.name)[0]
+        
+            # Criar ficheiro PDF temporário
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
+                temp_pdf.write(uploaded_file.read())
+                temp_pdf_path = temp_pdf.name
+        
+            # Agora cria o excel_entrada e excel_saida no mesmo diretório do ficheiro temporário,
+            # mas com nomes baseados no ficheiro original:
+            temp_dir = os.path.dirname(temp_pdf_path)
+            excel_entrada = os.path.join(temp_dir, base_name + ".xlsx")
+            excel_saida = os.path.join(temp_dir, base_name + "_processed.xlsx")
+
+            placeholder = st.empty()
+            placeholder.info("⏳ Por favor aguarde...")
+            
+            # Executar processamento 
+            processar(excel_entrada,excel_saida)
 
             placeholder.empty()
             st.success("Processo terminado!")
