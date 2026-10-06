@@ -244,20 +244,22 @@ if cliente:
     if cliente == 'LINGUA FRANCA':
         # Exemplo: importar funções do script lingua_franca
         from lingua_franca import processar
-        uploaded_file = st.file_uploader("Carregue o excel", type=["pdf"])
-        
+        uploaded_file = st.file_uploader("Carregue o Excel", type=["xls", "xlsx"])
+
         if uploaded_file is not None:
+            #extrair o nome do ficheiro
             base_name = os.path.splitext(uploaded_file.name)[0]
         
-            # Criar ficheiro PDF temporário
-            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
-                temp_pdf.write(uploaded_file.read())
-                temp_pdf_path = temp_pdf.name
+            # Criar ficheiro excel temporário com extensao .xlsx
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".xlsx") as temp_excel:
+                #guardar o conteudo do ficheiro carregado no ficheiro temporário criado
+                temp_excel.write(uploaded_file.read())
+                #guardar o caminho do ficheiro temporário criado na varivel excel_path
+                excel_entrada = temp_excel.name
         
-            # Agora cria o excel_entrada e excel_saida no mesmo diretório do ficheiro temporário,
-            # mas com nomes baseados no ficheiro original:
-            temp_dir = os.path.dirname(temp_pdf_path)
-            excel_entrada = os.path.join(temp_dir, base_name + ".xlsx")
+            #obter o diretorio do ficheiro temporário:
+            temp_dir = os.path.dirname(excel_entrada)
+            #criar o ficheiro final
             excel_saida = os.path.join(temp_dir, base_name + "_processed.xlsx")
 
             placeholder = st.empty()
@@ -274,6 +276,4 @@ if cliente:
                 st.download_button("Descarregar Excel Processado", f, file_name=os.path.basename(excel_saida))
         
             # Apagar ficheiros temporários
-            os.remove(temp_pdf_path)
             os.remove(excel_entrada)
-            os.remove(excel_saida)
